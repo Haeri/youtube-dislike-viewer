@@ -1,6 +1,6 @@
 # YouTube Dislike Viewer
 
-A simple website to query a YouTube video dislikes. 
+A simple website to query dislikes on YouTube videos. 
 
 [Website](https://haeri.github.io/youtube-dislike-viewer/)
 

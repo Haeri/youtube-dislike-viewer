@@ -5,14 +5,17 @@ let preview_panel_target_ui;
 let preview_panel_template_ui;
 let video_id_ui;
 let search_btn_ui;
+let preview_panel_spinner_ui;
 
 function init() {
+    // Cache UI elements
     preview_panel_target_ui = document.getElementById('preview-panel-target');
     preview_panel_template_ui = document.getElementById('preview-panel-template');
     video_id_ui = document.getElementById('video-id');
     search_btn_ui = document.getElementById('search-btn');
+    preview_panel_spinner_ui = document.getElementById('preview-panel-spinner');
 
-
+    // Add event listener to input and button
     search_btn_ui.addEventListener('click', () => {
         load_by_vide_id(video_id_ui.value);
     });
@@ -22,6 +25,16 @@ function init() {
             load_by_vide_id(video_id_ui.value);
         }
     });
+
+    // Load Video from GET parameter "v"
+    let queryString = window.location.search;
+    if (!queryString) return;
+    let urlParams = new URLSearchParams(queryString);
+    let value = urlParams.get('v')
+    if (value) {
+        video_id_ui.value = value;
+        load_by_vide_id(value);
+    }
 }
 
 function format_number(x) {
@@ -38,6 +51,9 @@ function format_date(d) {
 }
 
 function render_error(reason) {
+    preview_panel_spinner_ui.classList.remove('show');
+    preview_panel_target_ui.classList.add('show');
+
     preview_panel_target_ui.innerHTML = `
     <div class="panel error-panel">
     <span>${reason}</span>
@@ -46,6 +62,9 @@ function render_error(reason) {
 }
 
 async function load_by_vide_id(id) {
+    preview_panel_target_ui.classList.remove('show');
+    preview_panel_spinner_ui.classList.add('show');
+
     if (id === "") {
         render_error('No Video id provided.');
         return;
@@ -73,6 +92,9 @@ async function load_by_vide_id(id) {
 
     preview_panel_target_ui.innerHTML = "";
     preview_panel_target_ui.appendChild(clone_node);
+
+    preview_panel_spinner_ui.classList.remove('show');
+    preview_panel_target_ui.classList.add('show');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
