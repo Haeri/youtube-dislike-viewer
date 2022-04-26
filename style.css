@@ -116,6 +116,8 @@ body {
 
 #preview-panel-target {
     opacity: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
 }
 #preview-panel-target.show {
@@ -209,11 +211,30 @@ footer a:hover {
 
 
 
+@media only screen and (max-width: 700px) {
+    h1{
+        font-size: 1.8rem;
+    }
+    .search-box input{
+        width: 100%;
+    }
+    .main-wrapper {
+        width: 90vw;
+    }
+    footer{
+        position: relative;
+    }
+}
+
+
+
 
 
 
 .lds-ripple {
     opacity: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
     display: inline-block;
     position: absolute;
@@ -223,7 +244,8 @@ footer a:hover {
     vertical-align: middle;
     left: 50%;
     -webkit-transform: translateX(-50%);
-    transform: translateX(-50%)
+    -ms-transform: translateX(-50%);
+        transform: translateX(-50%)
 }
 
 .lds-ripple.show {
