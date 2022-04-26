@@ -145,7 +145,8 @@ body {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding: 0 0.5rem;
+    padding: 0 0.5rem;    
+    border-bottom:  1px solid #303030;    
 }
 .yt-views-panel {
     color: #aaa;
@@ -156,6 +157,26 @@ body {
     display: -ms-flexbox;
     display: flex;
     gap: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.yt-rating-wrapper{
+    position: absolute;
+    bottom:  -1px;
+    left:  0;
+    width: 100%;
+    height:  2px;
+    background: #494949;
+}
+
+#like-ratio{
+    position: absolute;
+    left:  0;
+    width: 0;
+    height:  2px;
+    background: #227dc5;
+    transition:  0.3s;
 }
 
 .stats-item {

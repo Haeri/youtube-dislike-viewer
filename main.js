@@ -17,12 +17,12 @@ function init() {
 
     // Add event listener to input and button
     search_btn_ui.addEventListener('click', () => {
-        load_by_vide_id(video_id_ui.value);
+        load_by_video_id(video_id_ui.value);
     });
     video_id_ui.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
-            load_by_vide_id(video_id_ui.value);
+            load_by_video_id(video_id_ui.value);
         }
     });
 
@@ -33,7 +33,7 @@ function init() {
     let value = urlParams.get('v')
     if (value) {
         video_id_ui.value = value;
-        load_by_vide_id(value);
+        load_by_video_id(value);
     }
 }
 
@@ -61,7 +61,7 @@ function render_error(reason) {
     `;
 }
 
-async function load_by_vide_id(id) {
+async function load_by_video_id(id) {
     preview_panel_target_ui.classList.remove('show');
     preview_panel_spinner_ui.classList.add('show');
 
@@ -88,13 +88,17 @@ async function load_by_vide_id(id) {
     clone_node.getElementById('views-slot').innerText = format_number(data.viewCount);
     clone_node.getElementById('date-slot').innerText = format_date(data.dateCreated);
     clone_node.getElementById('upvote-slot').innerText = format_number(data.likes);
-    clone_node.getElementById('downvote-slot').innerText = format_number(data.dislikes);
+    clone_node.getElementById('downvote-slot').innerText = format_number(data.dislikes);    
 
     preview_panel_target_ui.innerHTML = "";
     preview_panel_target_ui.appendChild(clone_node);
 
     preview_panel_spinner_ui.classList.remove('show');
     preview_panel_target_ui.classList.add('show');
+
+    setTimeout(() => {
+        document.getElementById('like-ratio').style.width = `${data.likes/(data.likes + data.dislikes)*100}%`;
+    }, 300);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
