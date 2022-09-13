@@ -67,6 +67,7 @@ body {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
 .search-box input {
     font-size: 1.1rem;
     font-weight: 400;
@@ -77,19 +78,20 @@ body {
     border: 1px solid #313131;
     width: 50%;
     outline: none;
-    border-radius: 10px 0 0 10px;
+    border-radius: 4px 0 0 4px;
 }
 
 .search-box button {
     border: none;
     cursor: pointer;
     background: #313131;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 4px 4px 0;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
     padding: 0 1rem;
 }
+
 .search-box button:hover {
     background: #383838;
 }
@@ -99,7 +101,7 @@ body {
 .panel {
     padding: 0.8rem;
     background: #252525;
-    border-radius: 10px;
+    border-radius: 4px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
 }
@@ -120,6 +122,7 @@ body {
     -o-transition: 0.3s;
     transition: 0.3s;
 }
+
 #preview-panel-target.show {
     opacity: 1;
 }
@@ -145,9 +148,11 @@ body {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding: 0 0.5rem;    
-    border-bottom:  1px solid #303030;    
+    padding: 0 0.5rem;
+    border-bottom: 1px solid #303030;
+    margin-bottom: 10px;
 }
+
 .yt-views-panel {
     color: #aaa;
 }
@@ -161,22 +166,22 @@ body {
     padding-bottom: 0.5rem;
 }
 
-.yt-rating-wrapper{
+.yt-rating-wrapper {
     position: absolute;
-    bottom:  -1px;
-    left:  0;
+    bottom: -1px;
+    left: 0;
     width: 100%;
-    height:  2px;
+    height: 2px;
     background: #494949;
 }
 
-#like-ratio{
+#like-ratio {
     position: absolute;
-    left:  0;
+    left: 0;
     width: 0;
-    height:  2px;
+    height: 2px;
     background: #227dc5;
-    transition:  0.3s;
+    transition: 0.3s;
 }
 
 .stats-item {
@@ -225,6 +230,7 @@ footer a {
     transition: 0.3s;
     text-decoration: none;
 }
+
 footer a:hover {
     color: white;
 }
@@ -233,16 +239,19 @@ footer a:hover {
 
 
 @media only screen and (max-width: 700px) {
-    h1{
+    h1 {
         font-size: 1.8rem;
     }
-    .search-box input{
+
+    .search-box input {
         width: 100%;
     }
+
     .main-wrapper {
         width: 90vw;
     }
-    footer{
+
+    footer {
         position: relative;
     }
 }
@@ -266,7 +275,7 @@ footer a:hover {
     left: 50%;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
-        transform: translateX(-50%)
+    transform: translateX(-50%)
 }
 
 .lds-ripple.show {

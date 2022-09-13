@@ -17,12 +17,12 @@ function init() {
 
     // Add event listener to input and button
     search_btn_ui.addEventListener('click', () => {
-        load_by_video_id(video_id_ui.value);
+        load_by_video_id(extract_video_id(video_id_ui.value));
     });
     video_id_ui.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
-            load_by_video_id(video_id_ui.value);
+            load_by_video_id(extract_video_id(video_id_ui.value));
         }
     });
 
@@ -30,7 +30,7 @@ function init() {
     let queryString = window.location.search;
     if (!queryString) return;
     let urlParams = new URLSearchParams(queryString);
-    let value = urlParams.get('v')
+    let value = urlParams.get('v');
     if (value) {
         video_id_ui.value = value;
         load_by_video_id(value);
@@ -61,6 +61,28 @@ function render_error(reason) {
     `;
 }
 
+function extract_video_id(input) {
+    if (input.length >= 11) {
+        let url;
+        try {
+            url = new URL(input);
+        } catch (e) {
+            return input;
+        }
+
+        let urlParams = new URLSearchParams(url.search);
+        let value = urlParams.get('v');
+        if (value) {
+            return value;
+        } else {
+            let segments = input.split("/");
+            return segments[segments.length - 1];
+        }
+    }
+
+    return input;
+}
+
 async function load_by_video_id(id) {
     preview_panel_target_ui.classList.remove('show');
     preview_panel_spinner_ui.classList.add('show');
@@ -80,15 +102,15 @@ async function load_by_video_id(id) {
         let headers = await fetch(YT_DISLIKE_API + id);
         if (!headers.ok) throw "Status " + headers.status;
         data = await headers.json();
-    }catch(e) {
-        render_error(`Video with id '${id}' not found.`);
+    } catch (e) {
+        render_error(`Video with url or id '${id}' not found.`);
         return;
     }
 
     clone_node.getElementById('views-slot').innerText = format_number(data.viewCount);
     clone_node.getElementById('date-slot').innerText = format_date(data.dateCreated);
     clone_node.getElementById('upvote-slot').innerText = format_number(data.likes);
-    clone_node.getElementById('downvote-slot').innerText = format_number(data.dislikes);    
+    clone_node.getElementById('downvote-slot').innerText = format_number(data.dislikes);
 
     preview_panel_target_ui.innerHTML = "";
     preview_panel_target_ui.appendChild(clone_node);
@@ -97,7 +119,7 @@ async function load_by_video_id(id) {
     preview_panel_target_ui.classList.add('show');
 
     setTimeout(() => {
-        document.getElementById('like-ratio').style.width = `${data.likes/(data.likes + data.dislikes)*100}%`;
+        document.getElementById('like-ratio').style.width = `${data.likes / (data.likes + data.dislikes) * 100}%`;
     }, 300);
 }
 
